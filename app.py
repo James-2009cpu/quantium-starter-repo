@@ -2,13 +2,11 @@ import pandas as pd
 from dash import Dash, dcc, html
 import plotly.express as px
 
-# Load your processed data
+# Load processed data (adjust path if needed)
 df = pd.read_csv("sales_output.csv")
 
-# Make sure Date is in datetime format
+# Ensure correct types
 df["Date"] = pd.to_datetime(df["Date"])
-
-# Sort by date (important for line chart)
 df = df.sort_values("Date")
 
 # Create line chart
@@ -28,5 +26,6 @@ app.layout = html.Div([
     dcc.Graph(figure=fig)
 ])
 
+# FIXED for newer Dash versions
 if __name__ == "__main__":
-    app.run_server(debug=True)
+    app.run(debug=True)
